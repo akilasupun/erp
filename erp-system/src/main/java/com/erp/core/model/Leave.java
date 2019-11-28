@@ -37,7 +37,7 @@ public class Leave {
 	}
 
 	public enum LeaveTypeEnum {
-		ANNUAL, CASUAL, SICK, APPROVED_NOPAY, NOPAY;
+		ANNUAL, CASUAL, SICK, AUTHORIZED_NOPAY, NOPAY;
 	}
 
 	public enum LeaveDurationEnum {
