@@ -6,4 +6,6 @@ public interface LeaveService {
 
 	void applyLeave(Leave newLeave);
 
+	void saveLeave(Leave leaveToSave);
+
 }

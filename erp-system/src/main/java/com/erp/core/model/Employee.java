@@ -1,17 +1,33 @@
 package com.erp.core.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "EMPLOYEE")
 public class Employee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long empId;
 	private String firstName;
 	private String lastName;
 	private EmployeeContractTypeEnum contractType;
-	private int epfNo;
+	private Integer epfNo;
 	private String jobTitle;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "department_id_fk", referencedColumnName = "deptId")
+	// @MapsId("id")
 	private Department department;
 	private String email;
 
-	Employee(String firstName, String lastName, EmployeeContractTypeEnum contractType, int epfNo, String jobTitle,
-			Department department) {
+	public Employee(String firstName, String lastName, EmployeeContractTypeEnum contractType, Integer epfNo,
+			String jobTitle, Department department) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -45,7 +61,7 @@ public class Employee {
 		this.contractType = contractType;
 	}
 
-	public int getEpfNo() {
+	public Integer getEpfNo() {
 		return epfNo;
 	}
 

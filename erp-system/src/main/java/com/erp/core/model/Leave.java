@@ -2,7 +2,20 @@ package com.erp.core.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "LEAVES")
 public class Leave {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long leaveId;
 
 	private LocalDate startDate;
@@ -10,10 +23,20 @@ public class Leave {
 	private LeaveDurationEnum leaveDuration;
 	private LeaveTypeEnum leaveType;
 	private LeaveStatusEnum status;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "applicant_id_fk", referencedColumnName = "empId")
+	// @MapsId("empId")
 	private Employee applicant;
 
-	public Leave() {
+	public Leave(LocalDate startDate, LocalDate endDate, LeaveDurationEnum leaveDuration, LeaveTypeEnum leaveType,
+			Employee applicant) {
+		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.leaveDuration = leaveDuration;
+		this.leaveType = leaveType;
 		this.status = LeaveStatusEnum.WAITING;
+		this.applicant = applicant;
 	}
 
 	public LocalDate getDate() {

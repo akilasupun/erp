@@ -1,24 +1,37 @@
 package com.erp.core.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "DEPARTMENT")
 public class Department {
-	private Long id;
-	private Employee head;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long deptId;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "head_id_fk", referencedColumnName = "empId", nullable = true)
+	// @MapsId("empId")
+	// private Employee head;
 	private Title deptTitle;
 
-	Department(Employee head, Title deptTitle) {
+	public Department(/* Employee head, */ Title deptTitle) {
 		super();
-		this.head = head;
+		// this.head = head;
 		this.deptTitle = deptTitle;
 	}
 
-	public Employee getHead() {
-		return head;
-	}
-
-	public void setHead(Employee head) {
-		this.head = head;
-	}
-
+	/*
+	 * public Employee getHead() { return head; }
+	 * 
+	 * public void setHead(Employee head) { this.head = head; }
+	 */
 	public Title getDeptTitle() {
 		return deptTitle;
 	}
@@ -28,10 +41,10 @@ public class Department {
 	}
 
 	public Long getId() {
-		return id;
+		return deptId;
 	}
 
 	public enum Title {
-		FINANCE, IT, HR, SALES
+		FINANCE, IT, HR, SALES, BOARD
 	}
 }
