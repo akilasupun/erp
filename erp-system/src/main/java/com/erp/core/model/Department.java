@@ -1,12 +1,9 @@
 package com.erp.core.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,8 +12,9 @@ public class Department {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long deptId;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "head_id_fk", referencedColumnName = "empId", nullable = true)
+	// @OneToOne(cascade = CascadeType.ALL)
+	// @JoinColumn(name = "head_id_fk", referencedColumnName = "empId", nullable =
+	// true)
 	// @MapsId("empId")
 	// private Employee head;
 	private Title deptTitle;
